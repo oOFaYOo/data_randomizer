@@ -4,7 +4,7 @@ import Table from "./components/Table";
 
 function App() {
   return (
-    <div className={'relative w-full h-full flex flex-col bg-emerald-700'}>
+    <div className={'relative w-full h-full flex flex-col pb-8'}>
       <TopPanel />
       <Table />
     </div>
