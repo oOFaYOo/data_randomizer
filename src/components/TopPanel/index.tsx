@@ -4,7 +4,7 @@ import ShuffleIcon from '@mui/icons-material/Shuffle';
 
 const TopPanel = () => {
 
-    const [region, setRegion] = useState<number>(0);
+    const [region, setRegion] = useState<number>(1);
     const [errors, setErrors] = useState<string>('0');
     const [seed, setSeed] = useState<number>(0);
 
@@ -17,8 +17,9 @@ const TopPanel = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={1}
+                        value={region}
                         label="Region"
+                        onChange={(e)=>{setRegion(e.target.value as number)}}
                     >
                         <MenuItem value={1}>Region 1</MenuItem>
                         <MenuItem value={2}>Region 2</MenuItem>
@@ -35,7 +36,7 @@ const TopPanel = () => {
                     type={'number'} value={errors} min={0} max={1000}
                 onChange={(e)=>{setErrors(+e.target.value >= 0
                     ?(+e.target.value <= 1000
-                    ? (e.target.value.length > 2 
+                    ? (e.target.value.length > 2
                         ? (e.target.value[0] === '0'
                             ? e.target.value.slice(1)
                             : e.target.value)

@@ -6,19 +6,19 @@ const Table = () => {
             <thead>
             <tr>
                 <th></th>
-                <th>eMail</th>
-                <th>Registration date</th>
-                <th>Last login</th>
-                <th>Status</th>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>Phone</th>
             </tr>
             </thead>
             <tbody>
                     <tr>
                         <td>1</td>
-                        <td>воапроврп</td>
-                        <td>воапроврп</td>
-                        <td>воапроврп</td>
-                        <td>воапроврп</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
             </tbody>
         </table>
