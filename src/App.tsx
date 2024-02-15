@@ -5,6 +5,7 @@ import seedrandom from "seedrandom";
 import {ITable} from "./components/Table/type";
 import generator from "./generator";
 import {regionType} from "./generator/type";
+import api_client from "./api_client";
 
 function App() {
 
@@ -12,21 +13,17 @@ function App() {
     const [region, setRegion] = useState<regionType>(regionType.usa);
     const [errors, setErrors] = useState<number>(0);
     const [seed, setSeed] = useState<string>('');
+    const [page, setPage] = useState<number>(0);
     const usersGenerationRandom = useCallback(seedrandom(seed), [seed, errors]);
     const errorsGenerationRandom = useCallback(seedrandom(seed + errors.toString()), [seed, errors]);
 
     useEffect(() => {
-        const processedData = [];
-        let count = 0;
-        while (count < 20) {
-            let userData = generator.getRandomData(region, usersGenerationRandom);
-            userData = generator.addRandomErrors(userData, errors, errorsGenerationRandom, region);
-            processedData.push(generator.prepareUserData(userData));
-            count++;
-        }
-        setData(processedData);
+        (async ()=>{
+            const response = await api_client.getData(seed, region, page, errors);
+            setData(response.data);
+        })()
     }, [
-        region, errors, seed
+        region, errors, seed, page
     ])
 
     return (
@@ -35,15 +32,7 @@ function App() {
                       setSeed={setSeed}/>
             <div id={'tableContainer'} className={'relative h-[80%] overflow-y-auto'} onScroll={(e) => {
                 if (e.currentTarget.offsetHeight + e.currentTarget.scrollTop >= e.currentTarget.scrollHeight) {
-                    const processedData = [...data];
-                    let counter = 0;
-                    while (counter < 10) {
-                        let userData = generator.getRandomData(region, usersGenerationRandom);
-                        userData = generator.addRandomErrors(userData, errors, errorsGenerationRandom, region);
-                        processedData.push(generator.prepareUserData(userData));
-                        counter++;
-                    }
-                    setData(processedData);
+                    setPage(page+1);
                 }
             }}>
                 <Table data={data}/>

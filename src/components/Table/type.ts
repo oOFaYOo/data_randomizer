@@ -1,5 +1,6 @@
 export interface ITable {
-    id: string,
+    number: number;
+    id: string;
     name: string;
     address: string;
     phone: string;

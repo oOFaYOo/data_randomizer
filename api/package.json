@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "main": "index.js",
+  "dependencies": {
+    "faker": "^6.6.6",
+    "faker-js": "^1.0.0",
+    "pure-rand": "^6.0.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
+  }
+}
