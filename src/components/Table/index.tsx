@@ -1,7 +1,7 @@
 import React from "react";
-import {TableType} from "./type";
+import {ITable} from "./type";
 
-const Table = ({data}: { data: TableType }) => {
+const Table = ({data}: { data: ITable[] }) => {
     return (
         <table className={'w-full max-h-[400px] overflow-hidden'}>
             <thead>
@@ -13,19 +13,19 @@ const Table = ({data}: { data: TableType }) => {
                 <th>Phone</th>
             </tr>
             </thead>
-                <tbody>
-                {
-                    data.map((item, i) =>
-                        <tr key={i}>
-                            <td>{i+1}</td>
-                            <td>{item.id}</td>
-                            <td>{item.name}</td>
-                            <td>{item.address}</td>
-                            <td className={'text-nowrap'}>{item.phone}</td>
-                        </tr>
-                    )
-                }
-                </tbody>
+            <tbody>
+            {
+                data.map((item, i) =>
+                    <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.address}</td>
+                        <td className={'text-nowrap'}>{item.phone}</td>
+                    </tr>
+                )
+            }
+            </tbody>
         </table>
     )
 }

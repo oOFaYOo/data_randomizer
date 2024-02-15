@@ -1,10 +1,10 @@
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select, Slider, TextField} from "@mui/material";
 import ShuffleIcon from '@mui/icons-material/Shuffle';
-import {regionType} from "../../Generator";
 import {ITopPanel} from "./type";
+import {regionType} from "../../generator/type";
 
-const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed} : ITopPanel) => {
+const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed}: ITopPanel) => {
 
     return (
         <div className={'h-24 shadow-lg mb-8 min-w-[955px] flex flex-row justify-evenly items-center'}>
@@ -30,7 +30,7 @@ const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed} : ITopPa
             <div className={'relative w-60 flex flex-row justify-center items-center'}>
                 <p className={'mr-4'}>Errors:</p>
                 <Slider size="small" valueLabelDisplay="off" defaultValue={0} min={0} max={10} aria-label="Default"
-                        step={0.1}
+                        step={0.25}
                         value={+errors}
                         onChange={(e, value) => {
                             setErrors(value as number)
