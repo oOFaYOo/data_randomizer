@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import TopPanel from "./components/TopPanel";
 import Table from "./components/Table";
 import getRandomData, {regionType} from "./Generator";
@@ -10,35 +10,21 @@ function App() {
     const [data, setData] = useState<TableType>([]);
     const [region, setRegion] = useState<regionType>(regionType.usa);
     const [errors, setErrors] = useState<string>('0');
-    const [seed, setSeed] = useState<string>('');
-
-    const predictableRandom = seedrandom(seed);
+    const [seed, setSeed] = useState<string>('000');
+    const random = useCallback(seedrandom(seed), [seed]);
+    console.log(seed);
 
     useEffect(() => {
         const arr = [];
         let i = 0;
         while (i < 20) {
-            arr.push(getRandomData(region, predictableRandom));
+            arr.push(getRandomData(region, random));
             i++;
         }
         setData(arr);
     }, [
         region, errors, seed
     ])
-
-    // useEffect(() => {
-    //
-    //     document.getElementById('tableContainer')?.addEventListener('scroll', function () {
-    //         console.log(data)
-    //         const arr = [...data];
-    //         let i = 0;
-    //         while (i < 5) {
-    //             arr.push(getRandomData(region, predictableRandom));
-    //             i++;
-    //         }
-    //         setData(arr);
-    //     });
-    // }, [])
 
     return (
         <div className={'fixed w-full h-full flex flex-col pb-8'}>
@@ -49,7 +35,8 @@ function App() {
                     const arr = [...data];
                     let i = 0;
                     while (i < 10) {
-                        arr.push(getRandomData(region, predictableRandom));
+                        const userData = getRandomData(region, random);
+                        arr.push(userData);
                         i++;
                     }
                     setData(arr);
