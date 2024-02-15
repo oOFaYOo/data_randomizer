@@ -30,15 +30,17 @@ const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed} : ITopPa
             <div className={'relative w-60 flex flex-row justify-center items-center'}>
                 <p className={'mr-4'}>Errors:</p>
                 <Slider size="small" valueLabelDisplay="off" defaultValue={0} min={0} max={10} aria-label="Default"
+                        step={0.1}
                         value={+errors}
                         onChange={(e, value) => {
-                            setErrors(value.toString())
+                            setErrors(value as number)
                         }}/>
                 <input
                     className={'w-[55px] pl-1 h-[36px] border-[#c4c4c4] ml-4 bg-transparent border-[1px] rounded focus:outline-none'}
                     type={'number'} value={errors} min={0} max={1000}
+                    step={0.1}
                     onChange={(e) => {
-                        setErrors(+e.target.value >= 0
+                        setErrors(+(+e.target.value >= 0
                             ? (+e.target.value <= 1000
                                 ? (e.target.value.length > 2
                                     ? (e.target.value[0] === '0'
@@ -46,7 +48,7 @@ const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed} : ITopPa
                                         : e.target.value)
                                     : e.target.value)
                                 : `${1000}`)
-                            : `${0}`)
+                            : `${0}`))
                     }}/>
             </div>
             <div className={'relative w-56 flex flex-row justify-center items-center'}>

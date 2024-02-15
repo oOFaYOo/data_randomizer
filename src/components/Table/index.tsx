@@ -19,8 +19,8 @@ const Table = ({data}: { data: TableType }) => {
                         <tr key={i}>
                             <td>{i+1}</td>
                             <td>{item.id}</td>
-                            <td>{`${item.surname} ${item.name} ${item.middleName ?? ''}`}</td>
-                            <td>{`${item.state}, ${item.city}, ${item.street} ${item.house}, ${item.apartment}`}</td>
+                            <td>{item.name}</td>
+                            <td>{item.address}</td>
                             <td className={'text-nowrap'}>{item.phone}</td>
                         </tr>
                     )
