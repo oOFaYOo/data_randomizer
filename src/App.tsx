@@ -17,7 +17,7 @@ function App() {
     useEffect(() => {
         const arr = [];
         let i = 0;
-        while (i < 30){
+        while (i < 20){
             arr.push(getRandomData(region, predictableRandom));
             i++;
         }

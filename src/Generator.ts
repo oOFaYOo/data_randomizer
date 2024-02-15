@@ -25,6 +25,7 @@ export default function getRandomData(region: regionType, predictableRandom: () 
     const sex = getRandomKey<'male' | 'female'>(names[region], predictableRandom);
     const state = getRandomKey<string>(states_cities[region], predictableRandom);
     return {
+        id: btoa((predictableRandom()*100).toString().slice(0,9)),
         name: getRandomArrayElement(names[region][sex], predictableRandom),
         surname: getRandomArrayElement(surnames[region][sex], predictableRandom),
         middleName: getRandomArrayElement(middleNames[region][sex], predictableRandom),
