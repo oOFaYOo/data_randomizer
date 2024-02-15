@@ -21,8 +21,10 @@ const japan: string[] = ["青山通り", "桜通り", "松本通り", "銀座通
     "赤坂見附通り", "永田町通り", "広尾通り", "新宿御苑通り", "神楽坂通り", "新宿中央通り", "押上通り", "歌舞伎町通り",
     "銀座中央通り", "赤坂見附通り"];
 
-export {
-    usa,
-    russia,
-    japan
+const streets = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default streets;

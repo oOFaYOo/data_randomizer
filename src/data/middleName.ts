@@ -16,8 +16,10 @@ const russia: middleName = {
 };
 const japan: middleName = {male:[], female:[]};
 
-export {
-    usa,
-    russia,
-    japan
+const middleNames = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default middleNames;

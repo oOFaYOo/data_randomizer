@@ -10,8 +10,10 @@ const russia: phone = {code:7,
     length: 7};
 const japan: phone = {code:81, middleCode:[80, 90, 70, 50], length: 8};
 
-export {
-    usa,
-    russia,
-    japan
+const phoneCodes = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default phoneCodes;

@@ -26,8 +26,10 @@ const japan: name = {
         "純子", "麻美", "千鶴", "希美", "香織", "和子", "彩子", "愛美", "咲子", "桃子", "美和", "みゆき"]
 }
 
-export {
-    usa,
-    russia,
-    japan
+const names = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default names;

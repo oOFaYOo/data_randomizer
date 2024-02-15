@@ -30,8 +30,10 @@ const usa: surname = {
     female: _usa
 }
 
-export {
-    usa,
-    russia,
-    japan
+const surnames = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default surnames;

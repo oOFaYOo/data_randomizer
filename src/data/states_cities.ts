@@ -1,4 +1,6 @@
-const usa = {
+type dict = {[key: string]: string[]};
+
+const usa:dict = {
         "California": ["Los Angeles", "San Francisco", "San Diego", "Sacramento", "San Jose", "Fresno", "Oakland", "Long Beach", "Santa Ana", "Anaheim"],
         "Texas": ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth", "El Paso", "Arlington", "Corpus Christi", "Plano", "Laredo"],
         "Florida": ["Miami", "Orlando", "Tampa", "Jacksonville", "Fort Lauderdale", "Saint Petersburg", "Tallahassee", "Hollywood", "Fort Myers", "Naples"],
@@ -16,7 +18,7 @@ const usa = {
         "Indiana": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel", "Fishers", "Bloomington", "Hammond", "Gary", "Lafayette"]
 };
 
-const russia = {
+const russia: dict = {
     "Московская область": ["Москва", "Красногорск", "Подольск", "Коломна", "Дмитров", "Жуковский", "Сергиев Посад", "Серпухов", "Люберцы", "Одинцово"],
     "Ленинградская область": ["Санкт-Петербург", "Пушкин", "Кронштадт", "Выборг", "Ломоносов", "Петродворец", "Кировск", "Кингисепп", "Всеволожск", "Колпино"],
     "Тюменская область": ["Тюмень", "Тобольск", "Ишим", "Ялуторовск", "Заводоуковск", "Тарко-Сале", "Нижневартовск", "Ханты-Мансийск", "Новый Уренгой", "Сургут"],
@@ -34,7 +36,7 @@ const russia = {
     "Омская область": ["Омск", "Тара", "Исилькуль", "Калачинск", "Колосовка", "Марьяновка", "Муромцево", "Называевск", "Нижняя Омка", "Одесское"]
 };
 
-const japan = {
+const japan:dict = {
         "北海道": ["札幌市", "旭川市", "函館市", "北見市", "苫小牧市", "帯広市", "網走市", "留萌市", "岩見沢市", "夕張市"],
         "青森県": ["青森市", "八戸市", "弘前市", "五所川原市", "田子町", "三沢市", "新青森市", "むつ市", "津軽", "五所川原市"],
         "岩手県": ["盛岡市", "花巻市", "滝沢市", "二戸市", "北上市", "花巻市", "一関市", "奥州市", "女川町", "八幡平市"],
@@ -52,8 +54,10 @@ const japan = {
         "長野県": ["長野市", "諏訪市", "飯田市", "松本市", "茨城", "須坂市", "上田市", "富山市", "鶯", "富山市"]
 };
 
-export {
-    usa,
-    russia,
-    japan
+const states_cities = {
+    usa: usa,
+    russia: russia,
+    japan: japan
 }
+
+export default states_cities;

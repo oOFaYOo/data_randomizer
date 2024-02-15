@@ -1,12 +1,10 @@
-import React, {useState} from "react";
-import {Button, FormControl, InputLabel, MenuItem, Select, Slider, TextField} from "@mui/material";
+import React from "react";
+import {FormControl, InputLabel, MenuItem, Select, Slider, TextField} from "@mui/material";
 import ShuffleIcon from '@mui/icons-material/Shuffle';
+import {regionType} from "../../Generator";
+import {ITopPanel} from "./type";
 
-const TopPanel = () => {
-
-    const [region, setRegion] = useState<number>(1);
-    const [errors, setErrors] = useState<string>('0');
-    const [seed, setSeed] = useState<number>(0);
+const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed} : ITopPanel) => {
 
     return (
         <div className={'h-24 shadow-lg mb-8 min-w-[955px] flex flex-row justify-evenly items-center'}>
@@ -19,38 +17,46 @@ const TopPanel = () => {
                         id="demo-simple-select"
                         value={region}
                         label="Region"
-                        onChange={(e)=>{setRegion(e.target.value as number)}}
+                        onChange={(e) => {
+                            setRegion(e.target.value as regionType)
+                        }}
                     >
-                        <MenuItem value={1}>Region 1</MenuItem>
-                        <MenuItem value={2}>Region 2</MenuItem>
-                        <MenuItem value={3}>Region 3</MenuItem>
+                        <MenuItem value={regionType.usa}>USA</MenuItem>
+                        <MenuItem value={regionType.russia}>Russia</MenuItem>
+                        <MenuItem value={regionType.japan}>Japan</MenuItem>
                     </Select>
                 </FormControl>
             </div>
             <div className={'relative w-60 flex flex-row justify-center items-center'}>
                 <p className={'mr-4'}>Errors:</p>
-                <Slider size="small" valueLabelDisplay="off" defaultValue={0} min={0} max={10} aria-label="Default" value={+errors}
-                onChange={(e, value)=>{setErrors(value.toString())}}/>
+                <Slider size="small" valueLabelDisplay="off" defaultValue={0} min={0} max={10} aria-label="Default"
+                        value={+errors}
+                        onChange={(e, value) => {
+                            setErrors(value.toString())
+                        }}/>
                 <input
                     className={'w-[55px] pl-1 h-[36px] border-[#c4c4c4] ml-4 bg-transparent border-[1px] rounded focus:outline-none'}
                     type={'number'} value={errors} min={0} max={1000}
-                onChange={(e)=>{setErrors(+e.target.value >= 0
-                    ?(+e.target.value <= 1000
-                    ? (e.target.value.length > 2
-                        ? (e.target.value[0] === '0'
-                            ? e.target.value.slice(1)
-                            : e.target.value)
-                        : e.target.value)
-                    : `${1000}`)
-                :`${0}`)}}/>
+                    onChange={(e) => {
+                        setErrors(+e.target.value >= 0
+                            ? (+e.target.value <= 1000
+                                ? (e.target.value.length > 2
+                                    ? (e.target.value[0] === '0'
+                                        ? e.target.value.slice(1)
+                                        : e.target.value)
+                                    : e.target.value)
+                                : `${1000}`)
+                            : `${0}`)
+                    }}/>
             </div>
             <div className={'relative w-56 flex flex-row justify-center items-center'}>
                 <p className={'mr-4'}>Seed:</p>
-                <TextField id="outlined-basic" variant="outlined"/>
-                <button><ShuffleIcon/></button>
-            </div>
-            <div className={'relative w-56 flex flex-row justify-center items-center'}>
-                <Button variant="outlined">Export</Button>
+                <TextField id="outlined-basic" variant="outlined" value={seed} onChange={(e) => {
+                    setSeed(e.target.value)
+                }}/>
+                <button onClick={() => {
+                    setSeed((Math.random() * 10000000).toFixed())
+                }}><ShuffleIcon/></button>
             </div>
         </div>
     )
