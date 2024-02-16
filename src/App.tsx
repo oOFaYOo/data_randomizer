@@ -1,9 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import TopPanel from "./components/TopPanel";
 import Table from "./components/Table";
-import seedrandom from "seedrandom";
 import {ITable} from "./components/Table/type";
-import generator from "./generator";
 import {regionType} from "./generator/type";
 import api_client from "./api_client";
 
@@ -14,13 +12,11 @@ function App() {
     const [errors, setErrors] = useState<number>(0);
     const [seed, setSeed] = useState<string>('');
     const [page, setPage] = useState<number>(0);
-    const usersGenerationRandom = useCallback(seedrandom(seed), [seed, errors]);
-    const errorsGenerationRandom = useCallback(seedrandom(seed + errors.toString()), [seed, errors]);
 
     useEffect(() => {
         (async ()=>{
             const response = await api_client.getData(seed, region, page, errors);
-            setData(response.data);
+            setData([...data, ...response.data]);
         })()
     }, [
         region, errors, seed, page

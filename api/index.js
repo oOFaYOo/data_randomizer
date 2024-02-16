@@ -20,8 +20,8 @@ app.use(express.static(path.join(__dirname, '../build')))
 
 app.get('/api/data', async (req, res) => {
     try{
-    const {seed, page, error, region} = req.query;
-    const users = generateUsers(+seed, page, error, region);
+    const {seed, page, errors, region} = req.query;
+    const users = generateUsers(+seed, +page, +errors, region);
     res.send(users);}
     catch (e){
         console.log(e);
@@ -42,32 +42,56 @@ function generatePureRandRandomizer(seed, factory = xoroshiro128plus) {
 
 function generateUsers(seed, page, errors, region) {
     let faker;
-    let randomizer = generatePureRandRandomizer(seed);
-    randomizer.seed(seed + region);
+    let usersRandomizer = generatePureRandRandomizer(seed);
+    let errorsRandomizer = generatePureRandRandomizer(seed);
+    usersRandomizer.seed(seed * 571 + page * 179);
+    errorsRandomizer.seed(seed + page + errors);
     switch (region) {
         case 'usa':
-            faker = new Faker({locale: [fr, base], randomizer: randomizer});
+            faker = new Faker({locale: [fr, base], randomizer: usersRandomizer});
             break;
         case 'russia':
-            faker = new Faker({locale: [ru, base], randomizer: randomizer});
+            faker = new Faker({locale: [ru, base], randomizer: usersRandomizer});
             break;
         case 'japan':
-            faker = new Faker({locale: [ja, base], randomizer: randomizer});
+            faker = new Faker({locale: [ja, base], randomizer: usersRandomizer});
             break;
         default:
             throw new Error(`Unknown region '${region}'`);
     }
 
     let users = [];
-    const count = page === 0 ? 20 : 10;
+    const count = page === 0 ? 20 : 20;
     for (let i = 0; i < count; i++) {
-        users.push({
-            number: 20 * page + i,
+        const user = {
+            number: (20 * page + i).toString(),
             id: 'asdasd',
-            name: faker.person.firstName(),
+            name: faker.person.fullName(),
             address: faker.location.city(),
             phone: faker.phone.number()
-        });
+        };
+
+        const lastErrorChance = errors - Math.trunc(errors);
+        for (let j = 0; j < errors; j++) {
+            if (lastErrorChance > 0 && j === Math.trunc(errors)){
+                const randomValue = errorsRandomizer.next();
+                if (randomValue > lastErrorChance)
+                    continue;
+            }
+            const keys = Object.keys(user);
+            let randomKey;
+            while (!randomKey || randomKey === 'number' || randomKey === 'id') {
+                randomKey = keys[Math.trunc(errorsRandomizer.next() * 100) % keys.length]
+            }
+
+            const value = user[randomKey];
+            const splittedValue = value.split('');
+            const randomIndex = Math.trunc(errorsRandomizer.next() * 100) % splittedValue.length;
+            splittedValue[randomIndex] = 't';
+            user[randomKey] = splittedValue.join('');
+        }
+
+        users.push(user);
     }
     return users;
 }

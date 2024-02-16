@@ -17,7 +17,7 @@ const Table = ({data}: { data: ITable[] }) => {
             {
                 data.map((item, i) =>
                     <tr key={i}>
-                        <td>{i + 1}</td>
+                        <td>{+item.number + 1}</td>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
                         <td>{item.address}</td>
