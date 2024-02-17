@@ -1,5 +1,4 @@
 import React from "react";
-import {regionType} from "../../generator/type";
 
 export interface ITopPanel {
     region: regionType,
@@ -7,5 +6,12 @@ export interface ITopPanel {
     seed: string,
     setRegion: React.Dispatch<React.SetStateAction<regionType>>,
     setErrors: React.Dispatch<React.SetStateAction<number>>,
-    setSeed: React.Dispatch<React.SetStateAction<string>>
+    setSeed: React.Dispatch<React.SetStateAction<string>>,
+    csvDownloadLink: string
+}
+
+export enum regionType {
+    france = 'france',
+    russia = 'russia',
+    japan = 'japan'
 }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "index.js",
   "dependencies": {
+    "export-to-csv": "^1.2.2",
     "faker": "^6.6.6",
     "faker-js": "^1.0.0",
     "pure-rand": "^6.0.4"

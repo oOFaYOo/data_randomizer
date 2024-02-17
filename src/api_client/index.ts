@@ -1,14 +1,18 @@
-import {regionType} from "../generator/type";
-import {ITable} from "../components/Table/type";
+import {regionType} from "../components/TopPanel/type";
+import {IApiClient} from "./type";
 
-class ApiClient {
+class ApiClient implements IApiClient {
 
-    async getData(seed: string, region: regionType, page: number, errors: number): Promise<{status: number, data: ITable[]}> {
+    async getData(seed: string, region: regionType, page: number, errors: number) {
         const response = await fetch(`/api/data?seed=${seed}&region=${region}&page=${page}&errors=${errors}`, {method: 'get'});
         return {
             status: response.status,
             data: await response.json()
         }
+    }
+
+    getCsvDataUrl(seed: string, region: regionType, page: number, errors: number) {
+        return `/api/data/csv?seed=${seed}&region=${region}&page=${page}&errors=${errors}`;
     }
 }
 

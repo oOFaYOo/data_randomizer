@@ -1,11 +1,9 @@
 import React from "react";
-import {FormControl, InputLabel, MenuItem, Select, Slider, TextField} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select, Slider, TextField} from "@mui/material";
 import ShuffleIcon from '@mui/icons-material/Shuffle';
-import {ITopPanel} from "./type";
-import {regionType} from "../../generator/type";
+import {ITopPanel, regionType} from "./type";
 
-const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed}: ITopPanel) => {
-
+const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed, csvDownloadLink}: ITopPanel) => {
     return (
         <div className={'h-24 shadow-lg mb-8 min-w-[955px] flex flex-row justify-evenly items-center'}>
             <div className={'relative w-56 flex flex-row justify-center items-center'}>
@@ -21,7 +19,7 @@ const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed}: ITopPan
                             setRegion(e.target.value as regionType)
                         }}
                     >
-                        <MenuItem value={regionType.usa}>USA</MenuItem>
+                        <MenuItem value={regionType.france}>France</MenuItem>
                         <MenuItem value={regionType.russia}>Russia</MenuItem>
                         <MenuItem value={regionType.japan}>Japan</MenuItem>
                     </Select>
@@ -60,6 +58,11 @@ const TopPanel = ({region, errors, seed, setRegion, setErrors, setSeed}: ITopPan
                     setSeed((Math.random() * 10000000).toFixed())
                 }}><ShuffleIcon/></button>
             </div>
+            <a href={csvDownloadLink} download={'users.csv'}>
+                <Button variant="outlined">
+                    Export
+                </Button>
+            </a>
         </div>
     )
 }
