@@ -126,7 +126,7 @@ function generateAddress(faker, randomizer) {
     const secondaryAddress = tryGetValue(faker.location.secondaryAddress);
     const zipCode = tryGetValue(faker.location.zipCode);
 
-    const format = getRandomNumber(randomizer, 1);
+    const format = getRandomNumber(randomizer, 5);
     switch (format) {
         case 0:
             return joinNotEmpty([state, city, street, secondaryAddress]);
