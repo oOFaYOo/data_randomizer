@@ -142,8 +142,8 @@ function generateAddress(faker, randomizer) {
 }
 
 function generateUsers(seed, page, errors, region) {
-    const combinedSeed = seed * 571 + page * 179 + errors * 463;
-    const usersRandomizer = generatePureRandRandomizer(seed);
+    const combinedSeed = seed * 571 + page * 179;
+    const usersRandomizer = generatePureRandRandomizer(combinedSeed);
     const faker = new Faker({locale: [getLocale(region), base], randomizer: usersRandomizer});
     let users = [];
     const count = page === 0 ? 20 : 10;
@@ -155,7 +155,7 @@ function generateUsers(seed, page, errors, region) {
             address: generateAddress(faker, usersRandomizer),
             phone: faker.phone.number()
         };
-        addErrorsToUser(user, errors, combinedSeed, region);
+        addErrorsToUser(user, errors, combinedSeed + errors * 463, region);
         users.push(user);
     }
     return users;
