@@ -4,8 +4,6 @@ import Table from "./components/Table";
 import {ITable} from "./components/Table/type";
 import {regionType} from "./components/TopPanel/type";
 import api_client from "./api_client";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 function App() {
 
@@ -29,7 +27,6 @@ function App() {
             setMaxPage(-1);
             versionRef.current++;
             setVersion(versionRef.current);
-            console.log('Params have changed. Reset data accumulator. New version =', versionRef.current);
         }, 500);
         }, [
         region, errors, seed
@@ -46,17 +43,13 @@ function App() {
                 return;
 
             const newPage = lastLoadedPage + 1;
-            console.log(`New max page = ${maxPage}. Start downloading data for seed=${seed}, region=${region}, page=${newPage}, errors=${errors}, version=${version}`);
             const response = await api_client.getData(seed, region, newPage, errors);
-            console.log(`Downloaded data for seed=${seed}, region=${region}, page=${newPage}, errors=${errors}, version=${version}`);
-            if (version != versionRef.current){
-                console.log(`Version has changed from ${version} to ${versionRef.current} during update. Aborting.`)
+            if (version !== versionRef.current){
                 setMaxPage(-1);
                 return;
             }
             setLastLoadedPage(newPage);
             setData(maxPage === 0 ? response.data : [...data, ...response.data]);
-            console.log(`All data updated for version=${version}`);
         })()
     }, [maxPage, lastLoadedPage])
 
