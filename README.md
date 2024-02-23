@@ -7,4 +7,4 @@ Using: Express.js(Node.js), PostgreSQL, React, TypeScript, Tailwind, Material UI
 https://data-randomizer.vercel.app/
 
 ## Demonstration:
-![demo]()
+![demo](https://github.com/oOFaYOo/data_randomizer/blob/main/public/demo.jpg)
